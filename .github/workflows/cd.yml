@@ -28,12 +28,12 @@ jobs:
         run: gcloud auth configure-docker us-docker.pkg.dev
 
 
-      - name: Crear repositorio en Artifact Registry (si no existe)
-        run: |
-          gcloud artifacts repositories create my-docker-repo \
-            --repository-format=docker \
-            --location=us-central1 \
-            --description="Repositorio Docker para la aplicación"
+#      - name: Crear repositorio en Artifact Registry (si no existe)
+#        run: |
+#          gcloud artifacts repositories create my-docker-repo \
+#            --repository-format=docker \
+#            --location=us-central1 \
+#            --description="Repositorio Docker para la aplicación"
 
       - name: Listar servicios en Cloud Run
         run: |
