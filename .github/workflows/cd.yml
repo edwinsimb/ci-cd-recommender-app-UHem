@@ -34,4 +34,4 @@ jobs:
 
       - name: Desplegar en Cloud Run
         run: |
-          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest --platform managed --allow-unauthenticated --memory 1Gi --cpu 1
+          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest --platform managed --allow-unauthenticated --region us-central1 --no-traffic
