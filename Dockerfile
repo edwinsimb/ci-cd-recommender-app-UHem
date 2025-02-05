@@ -8,7 +8,10 @@ WORKDIR /app
 COPY . .
 
 # Instalar las dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+
+# Exponer el puerto 8080
+EXPOSE 8080
 
 # Comando para ejecutar la app
 CMD ["streamlit", "run", "app.py", "--server.port", "8080"]
