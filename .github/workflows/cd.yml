@@ -23,30 +23,15 @@ jobs:
         run: |
           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
           gcloud config set run/region us-central1
-          
 
-
-
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy recommender-app \
-            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/recommender-app \
-            --platform managed \
-            --region us-central1 \
-            --allow-unauthenticated
-
-
-            
       - name: Configurar Docker para Google Artifact Registry
         run: gcloud auth configure-docker us-docker.pkg.dev
 
       - name: Construir y subir imagen Docker a Artifact Registry
         run: |
-          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-ia:latest .
-          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-ia:latest
+          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest .
+          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest
 
       - name: Desplegar en Cloud Run
         run: |
-          gcloud run deploy ci-cd-ia --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-ia:latest --platform managed --allow-unauthenticated
-
-
+          gcloud run deploy ci-cd-recommender-app-UHem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest --platform managed --allow-unauthenticated
