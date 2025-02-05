@@ -35,16 +35,16 @@ jobs:
 #            --location=us-central1 \
 #            --description="Repositorio Docker para la aplicación"
 
-      - name: Listar servicios en Cloud Run
-        run: |
-          gcloud run services list --platform managed --region us-central1
+#      - name: Listar servicios en Cloud Run
+#        run: |
+#          gcloud run services list --platform managed --region us-central1
 
 
       - name: Construir y subir imagen Docker a Artifact Registry
         run: |
-          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest .
-          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest
+          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest .
+          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest
 
       - name: Desplegar en Cloud Run
         run: |
-          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest --platform managed --allow-unauthenticated --region us-central1
+          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest --platform managed --allow-unauthenticated --region us-central1
