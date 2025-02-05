@@ -13,7 +13,7 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Set up Google Cloud credentials
+      - name: Autenticarse en Google Cloud
         uses: google-github-actions/auth@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
@@ -29,9 +29,9 @@ jobs:
 
       - name: Construir y subir imagen Docker a Artifact Registry
         run: |
-          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest .
-          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest
+          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest .
+          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest
 
       - name: Desplegar en Cloud Run
         run: |
-          gcloud run deploy ci-cd-recommender-app-UHem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest --platform managed --allow-unauthenticated
+          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-UHem:latest --platform managed --allow-unauthenticated
