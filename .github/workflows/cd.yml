@@ -27,6 +27,19 @@ jobs:
       - name: Configurar Docker para Google Artifact Registry
         run: gcloud auth configure-docker us-docker.pkg.dev
 
+
+      - name: Crear repositorio en Artifact Registry (si no existe)
+        run: |
+          gcloud artifacts repositories create my-docker-repo \
+            --repository-format=docker \
+            --location=us-central1 \
+            --description="Repositorio Docker para la aplicación"
+
+      - name: Listar servicios en Cloud Run
+        run: |
+          gcloud run services list --platform managed --region us-central1
+
+
       - name: Construir y subir imagen Docker a Artifact Registry
         run: |
           docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/ci-cd-recommender-app-uhem:latest .
