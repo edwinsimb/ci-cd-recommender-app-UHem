@@ -1,0 +1,35 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-training:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Google Cloud credentials
+        uses: google-github-actions/auth@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      
+      - name: Configurar Docker para Google Artifact Registry
+        run: gcloud auth configure-docker us-docker.pkg.dev
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar entrenamiento
+        run: python model/sistRecommend.py
