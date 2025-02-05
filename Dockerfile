@@ -10,8 +10,5 @@ COPY . .
 # Instalar las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exponer el puerto en el que corre la app (Streamlit por defecto usa el 8501)
-EXPOSE 8080
-
 # Comando para ejecutar la app
-CMD ["streamlit", "run", "app.py", "--server.port", "8080", "--server.headless", "true"]
+CMD ["streamlit", "run", "app.py", "--server.port", "8080"]

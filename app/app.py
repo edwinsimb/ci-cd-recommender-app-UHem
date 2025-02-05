@@ -1,3 +1,4 @@
+import os
 import pickle
 import streamlit as st
 import requests
@@ -36,8 +37,11 @@ def recommend(movie):
 
 
 
+# Obtén el puerto de la variable de entorno, usa 8080 por defecto si no está configurado
+port = int(os.environ.get("PORT", 8080))
 
-
+# Configura Streamlit para que use ese puerto
+st.set_page_config(page_title="Recommender App")
 
 st.header('Sistema de recomendación')
 movies = pd.read_pickle('data/movie_list.pkl')
