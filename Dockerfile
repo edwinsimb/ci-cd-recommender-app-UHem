@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . .
 
 # Instalar las dependencias
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Exponer el puerto 8080
 EXPOSE 8080
