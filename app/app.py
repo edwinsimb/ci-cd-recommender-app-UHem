@@ -37,11 +37,11 @@ def recommend(movie):
 
 
 
-# Asegúrate de que Streamlit use el puerto correcto
-port = int(os.environ.get("PORT", 8080))
+# # Asegúrate de que Streamlit use el puerto correcto
+#port = int(os.environ.get("PORT", 8080))
 
-# Configura Streamlit para que use ese puerto
-st.run_server(port=port)
+# # Configura Streamlit para que use ese puerto
+#st.run_server(port=port)
 
 st.header('Sistema de recomendación')
 movies = pd.read_pickle('data/movie_list.pkl')
