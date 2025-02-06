@@ -17,4 +17,7 @@ RUN pip install gunicorn
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación con Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+# CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+
+# Comando para ejecutar Streamlit (en lugar de gunicorn)
+CMD ["streamlit", "run", "app/app.py", "--server.port=8080", "--server.headless=true"]
