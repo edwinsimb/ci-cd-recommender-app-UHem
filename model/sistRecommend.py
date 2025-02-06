@@ -93,3 +93,7 @@ import pickle
 
 pickle.dump(new, open('app/movie_list.pkl', 'wb'))
 pickle.dump(similarity, open('app/similarity.pkl', 'wb'))
+
+
+import os
+print(os.getcwd())

@@ -36,7 +36,8 @@ def recommend(movie):
 
     return recommend_movies_names, recommend_movies_posters
 
-
+import os
+print(os.getcwd())
 
 st.header('Sistema de recomendación')
 movies = pd.read_pickle('app/app/movie_list.pkl')
