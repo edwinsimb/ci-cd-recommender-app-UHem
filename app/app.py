@@ -1,6 +1,7 @@
 import os
 import pickle
 import streamlit as st
+import altair
 import requests
 import pandas as pd
 
