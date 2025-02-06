@@ -10,9 +10,11 @@ COPY . .
 # Instalar las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Instalar Gunicorn para producción
+RUN pip install gunicorn
 
-# Exponer el puerto 8080
+# Exponer el puerto 8080 para que Cloud Run pueda acceder
 EXPOSE 8080
 
-# Comando para ejecutar la app
-CMD ["streamlit", "run", "app.py", "--server.port", "8080"]
+# Comando para ejecutar la aplicación con Gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
