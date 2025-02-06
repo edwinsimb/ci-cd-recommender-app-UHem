@@ -11,9 +11,9 @@ movies.dropna(inplace=True)
 movies = movies[['movie_id', 'title', 'overview', 'genres', 'keywords', 'cast', 'crew']]
 
 def convert(text):
-    L = [] # Creanos una lista vacía Llamada L para almacenar los valores extraidos del diccionario.
-    for i in ast.literal_eval(text): # Iteramos a través de los elementos obtenidos al evaluar el texto como código Python.
-        L.append(i['name']) # Extraemos el valor correspondiente a la clave 'name' en el diccionario i y lo agreganos a la lista L return L Devolvemos la lista que contiene los valores name extraidos de los diccionarios.
+    L = []
+    for i in ast.literal_eval(text):
+        L.append(i['name'])
     return L
 
 movies['genres'] = movies['genres'].apply(convert)

@@ -37,12 +37,6 @@ def recommend(movie):
 
 
 
-# # Asegúrate de que Streamlit use el puerto correcto
-port = int(os.environ.get("PORT", 8080))
-
-# # Configura Streamlit para que use ese puerto
-st.run_server(port=port)
-
 st.header('Sistema de recomendación')
 movies = pd.read_pickle('data/movie_list.pkl')
 simitarity = pd.read_pickle('data/similarity.pkl')
@@ -57,7 +51,7 @@ import streamlit as st
 if st.button('Mostrar Recomendaciones'):
     recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
     
-    cols = st.columns(5) # Cambia a 'st.columns' si no tienes acceso a 'st.beta_columns'.
+    cols = st.columns(5) 
     for i, col in enumerate(cols):
         col.text(recommended_movie_names[i])
         col.image(recommended_movie_posters[i])
