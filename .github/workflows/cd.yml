@@ -16,7 +16,6 @@ jobs:
       - name: Autenticarse en Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Configurar región predeterminada de Google Cloud
@@ -25,24 +24,13 @@ jobs:
           gcloud config set run/region us-central1
 
       - name: Configurar Docker para Google Artifact Registry
-        run: gcloud auth configure-docker us-docker.pkg.dev
-
-#      - name: Crear repositorio en Artifact Registry (si no existe)
-#        run: |
-#          gcloud artifacts repositories create my-docker-repo \
-#            --repository-format=docker \
-#            --location=us-central1 \
-#            --description="Repositorio Docker para la aplicación"
-
-#      - name: Listar servicios en Cloud Run
-#        run: |
-#          gcloud run services list --platform managed --region us-central1
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
       - name: Construir y subir imagen Docker a Artifact Registry
         run: |
-          docker build -t us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest .
-          docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest .
+          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest
 
       - name: Desplegar en Cloud Run
         run: |
-          gcloud run deploy ci-cd-recommender-app-uhem --image us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest --platform managed --allow-unauthenticated --region us-central1
+          gcloud run deploy ci-cd-recommender-app-uhem --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo-final/ci-cd-recommender-app-uhem:latest --platform managed --region us-central1 --allow-unauthenticated
