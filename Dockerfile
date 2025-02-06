@@ -5,7 +5,6 @@ FROM python:3.9
 WORKDIR /app
 
 # Copiar los archivos del proyecto al contenedor
-COPY ./app/movie_list.pkl /app/movie_list.pkl
 COPY . .
 
 # Instalar las dependencias
