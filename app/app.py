@@ -39,20 +39,33 @@ def recommend(movie):
 
 
 st.header('Sistema de recomendación')
-movies = pd.read_pickle('./app/movie_list.pkl')
-simitarity = pd.read_pickle('app/similarity.pkl')
 
-movie_list = movies['title'].values
-selected_movie = st.selectbox(
-    "Selecciona una película de Ia lista",
-    movie_list
-)
+#################################
+import os
+directorio = os.getcwd()
 
-import streamlit as st
-if st.button('Mostrar Recomendaciones'):
-    recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
-    
-    cols = st.columns(5) 
-    for i, col in enumerate(cols):
-        col.text(recommended_movie_names[i])
-        col.image(recommended_movie_posters[i])
+st.write(directorio)
+
+archivos = [f for f in os.listdir(directorio) if os.path.isfile(os.path.join(directorio, f))]
+st.write(archivos)
+
+
+#################################
+
+#movies = pd.read_pickle('app/movie_list.pkl')
+#simitarity = pd.read_pickle('app/similarity.pkl')
+#
+#movie_list = movies['title'].values
+#selected_movie = st.selectbox(
+#    "Selecciona una película de Ia lista",
+#    movie_list
+#)
+#
+#import streamlit as st
+#if st.button('Mostrar Recomendaciones'):
+#    recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
+#    
+#    cols = st.columns(5) 
+#    for i, col in enumerate(cols):
+#        col.text(recommended_movie_names[i])
+#        col.image(recommended_movie_posters[i])
