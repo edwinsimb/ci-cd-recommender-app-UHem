@@ -43,12 +43,14 @@ st.header('Sistema de recomendación')
 #################################
 import os
 directorio = os.getcwd()
-
 st.write(directorio)
-
 archivos = [f for f in os.listdir(directorio) if os.path.isfile(os.path.join(directorio, f))]
 st.write(archivos)
 
+
+st.write("/")
+archivos2 = [f for f in os.listdir("/") if os.path.isfile(os.path.join("/", f))]
+st.write(archivos2)
 
 #################################
 
